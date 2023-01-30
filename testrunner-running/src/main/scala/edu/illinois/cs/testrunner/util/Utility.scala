@@ -13,13 +13,11 @@ object Utility {
     def getAllMethods(clz: Class[_]): Stream[Method] = {
         var curClz = clz;
         val methods = new ListBuffer[Method]()
-        val nameSet = HashSet[String]()
         while (curClz != null) {
             for (m <- curClz.getDeclaredMethods) {
-                if (!nameSet.contains(m.getName)) {
+                if (!methods.contains(m) && !m.isBridge()) {
                     // exclude override method
                     methods.append(m)
-                    nameSet.add(m.getName)
                 }
             }
             curClz = curClz.getSuperclass

@@ -16,7 +16,7 @@ object Utility {
         val nameSet = HashSet[String]()
         while (curClz != null) {
             for (m <- curClz.getDeclaredMethods) {
-                if (!nameSet.contains(m.getName)) {
+                if (!methods.contains(m)) {
                     // exclude override method
                     methods.append(m)
                     nameSet.add(m.getName)
